@@ -12,11 +12,11 @@ button7 = gui.Button("7", button_color="Gray25", size=(2, 2), expand_x=True, exp
 button8 = gui.Button("8", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
 button9 = gui.Button("9", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
 
-add_button = gui.Button("+", size=(2, 2), expand_x=True, expand_y=True)
-subtract_button = gui.Button("-", size=(2, 2), expand_x=True, expand_y=True)
-divide_button = gui.Button("/", size=(2, 2), expand_x=True, expand_y=True)
-multiply_button = gui.Button("*", size=(2, 2), expand_x=True, expand_y=True)
-equals_button = gui.Button("=", size=(2, 2), expand_x=True, expand_y=True)
+add_button = gui.Button("+", font=16, expand_x=True, expand_y=True)
+subtract_button = gui.Button("-", font=16, expand_x=True, expand_y=True)
+divide_button = gui.Button("/", font=16, expand_x=True, expand_y=True)
+multiply_button = gui.Button("*", font=16, expand_x=True, expand_y=True)
+equals_button = gui.Button("=", font=16, expand_x=True, expand_y=True)
 
 output_label = gui.Text(key="output", size=(20, 2), expand_x=True, expand_y=True)
 exit_button = gui.Button("Exit", button_color="Red", size=(3, 1), expand_x=True, expand_y=True)
@@ -26,7 +26,7 @@ window = gui.Window("Calculator", layout=[[exit_button, output_label],
                                           [button4, button5, button6, multiply_button],
                                           [button1, button2, button3, subtract_button],
                                           [button0, equals_button, add_button]],
-                    resizable=True)
+                    size=(450, 450), resizable=True)
 num = []
 operator = ""
 running_total = ""
