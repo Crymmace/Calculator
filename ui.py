@@ -1,16 +1,16 @@
 import functions as func
 import PySimpleGUI as gui
 
-button0 = gui.Button("0", size=(2, 2), expand_x=True, expand_y=True)
-button1 = gui.Button("1", size=(2, 2), expand_x=True, expand_y=True)
-button2 = gui.Button("2", size=(2, 2), expand_x=True, expand_y=True)
-button3 = gui.Button("3", size=(2, 2), expand_x=True, expand_y=True)
-button4 = gui.Button("4", size=(2, 2), expand_x=True, expand_y=True)
-button5 = gui.Button("5", size=(2, 2), expand_x=True, expand_y=True)
-button6 = gui.Button("6", size=(2, 2), expand_x=True, expand_y=True)
-button7 = gui.Button("7", size=(2, 2), expand_x=True, expand_y=True)
-button8 = gui.Button("8", size=(2, 2), expand_x=True, expand_y=True)
-button9 = gui.Button("9", size=(2, 2), expand_x=True, expand_y=True)
+button0 = gui.Button("0", button_color="Grey25", size=(2, 2), expand_x=True, expand_y=True)
+button1 = gui.Button("1", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button2 = gui.Button("2", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button3 = gui.Button("3", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button4 = gui.Button("4", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button5 = gui.Button("5", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button6 = gui.Button("6", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button7 = gui.Button("7", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button8 = gui.Button("8", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button9 = gui.Button("9", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
 
 add_button = gui.Button("+", size=(2, 2), expand_x=True, expand_y=True)
 subtract_button = gui.Button("-", size=(2, 2), expand_x=True, expand_y=True)
@@ -19,13 +19,13 @@ multiply_button = gui.Button("*", size=(2, 2), expand_x=True, expand_y=True)
 equals_button = gui.Button("=", size=(2, 2), expand_x=True, expand_y=True)
 
 output_label = gui.Text(key="output", size=(20, 2), expand_x=True, expand_y=True)
-exit_button = gui.Button("Exit", size=(3, 2), expand_x=True, expand_y=True)
+exit_button = gui.Button("Exit", button_color="Red", size=(3, 1), expand_x=True, expand_y=True)
 
-window = gui.Window("Calculator", layout=[[output_label],
+window = gui.Window("Calculator", layout=[[exit_button, output_label],
                                           [button7, button8, button9, divide_button],
                                           [button4, button5, button6, multiply_button],
                                           [button1, button2, button3, subtract_button],
-                                          [button0, exit_button, equals_button, add_button]],
+                                          [button0, equals_button, add_button]],
                     resizable=True)
 num = []
 operator = ""

@@ -11,6 +11,7 @@ It can do simple calculations. Meaning, it can add, subtract, multiply, and divi
 2. Select an operator.
 3. Enter a second number.
 4. Hit the "=" button to see your results.
+
 (Optional) 
 5. Select an operator.
 6. Enter a number.
