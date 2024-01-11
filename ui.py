@@ -135,7 +135,7 @@ while True:
                             result = func.division(running_total, y)
                             window["output"].update(value=result)
                     except ZeroDivisionError:
-                        window["output"].update(value="Why must you hurt me in this way?")
+                        window["output"].update(value=func.get_zero_divide_message())
 
         case "Exit":
             break
