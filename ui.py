@@ -1,17 +1,19 @@
 import functions as func
 import PySimpleGUI as gui
 
-button0 = gui.Button("0", button_color="Grey25", size=(2, 2), expand_x=True, expand_y=True)
-button1 = gui.Button("1", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button2 = gui.Button("2", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button3 = gui.Button("3", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button4 = gui.Button("4", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button5 = gui.Button("5", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button6 = gui.Button("6", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button7 = gui.Button("7", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button8 = gui.Button("8", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
-button9 = gui.Button("9", button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button0 = gui.Button("0", font=16, button_color="Grey25", size=(2, 2), expand_x=True, expand_y=True)
+button1 = gui.Button("1", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button2 = gui.Button("2", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button3 = gui.Button("3", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button4 = gui.Button("4", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button5 = gui.Button("5", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button6 = gui.Button("6", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button7 = gui.Button("7", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button8 = gui.Button("8", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+button9 = gui.Button("9", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
+decimal_button = gui.Button(".", font=16, button_color="Gray25", size=(2, 2), expand_x=True, expand_y=True)
 
+clear_button = gui.Button("Clear", font=16, expand_x=True, expand_y=True)
 add_button = gui.Button("+", font=16, expand_x=True, expand_y=True)
 subtract_button = gui.Button("-", font=16, expand_x=True, expand_y=True)
 divide_button = gui.Button("/", font=16, expand_x=True, expand_y=True)
@@ -21,17 +23,15 @@ equals_button = gui.Button("=", font=16, expand_x=True, expand_y=True)
 output_label = gui.Text(key="output", size=(20, 2), expand_x=True, expand_y=True)
 exit_button = gui.Button("Exit", button_color="Red", size=(3, 1), expand_x=True, expand_y=True)
 
-window = gui.Window("Calculator", layout=[[exit_button, output_label],
+window = gui.Window("Calculator", layout=[[exit_button, clear_button, output_label],
                                           [button7, button8, button9, divide_button],
                                           [button4, button5, button6, multiply_button],
                                           [button1, button2, button3, subtract_button],
-                                          [button0, equals_button, add_button]],
+                                          [button0, decimal_button, equals_button, add_button]],
                     size=(450, 450), resizable=True)
 num = []
+final_nums = []
 operator = ""
-running_total = ""
-x = ""
-y = ""
 while True:
     event, values = window.read()
 
@@ -76,67 +76,85 @@ while True:
             num.append("0")
             window["output"].update(value=func.create_num(num))
 
+        case".":
+            num.append(".")
+            window["output"].update(value=func.create_num(num))
+
         case "+":
-            if running_total == "":
-                x = func.create_num(num)
-                num.clear()
             operator = "+"
+            if len(final_nums) > 0 and len(num) == 0:
+                pass
+            else:
+                number = func.create_num(num)
+                final_nums.append(number)
+                num.clear()
 
         case "-":
-            if running_total == "":
-                x = func.create_num(num)
-                num.clear()
             operator = "-"
+            if len(final_nums) > 0 and len(num) == 0:
+                pass
+            else:
+                number = func.create_num(num)
+                final_nums.append(number)
+                num.clear()
 
         case "*":
-            if running_total == "":
-                x = func.create_num(num)
-                num.clear()
             operator = "*"
+            if len(final_nums) > 0 and len(num) == 0:
+                pass
+            else:
+                number = func.create_num(num)
+                final_nums.append(number)
+                num.clear()
 
         case "/":
-            if running_total == "":
-                x = func.create_num(num)
-                num.clear()
             operator = "/"
+            if len(final_nums) > 0 and len(num) == 0:
+                pass
+            else:
+                number = func.create_num(num)
+                final_nums.append(number)
+                num.clear()
 
         case "=":
-            y = func.create_num(num)
+            number = func.create_num(num)
+            final_nums.append(number)
             num.clear()
             match operator:
                 case "+":
-                    if running_total == "":
-                        result = func.addition(x, y)
-                        window["output"].update(value=result)
-                        running_total = result
-                    else:
-                        result = func.addition(running_total, y)
-                        window["output"].update(value=result)
+                    result = func.addition(final_nums)
+                    window["output"].update(value=result)
+                    final_nums.clear()
+                    final_nums.append(result)
+
                 case "-":
-                    if running_total == "":
-                        result = func.subtraction(x, y)
-                        window["output"].update(value=result)
-                    else:
-                        result = func.subtraction(running_total, y)
-                        window["output"].update(value=result)
+                    result = func.subtraction(final_nums)
+                    window["output"].update(value=result)
+                    final_nums.clear()
+                    final_nums.append(result)
+
                 case "*":
-                    if running_total == "":
-                        result = func.multiplication(x, y)
-                        window["output"].update(value=result)
-                    else:
-                        result = func.multiplication(running_total, y)
-                        window["output"].update(value=result)
+                    result = func.multiplication(final_nums)
+                    window["output"].update(value=result)
+                    final_nums.clear()
+                    final_nums.append(result)
+
                 case "/":
                     try:
-                        if running_total == "":
-                            result = func.division(x, y)
-                            window["output"].update(value=result)
-                        else:
-                            result = func.division(running_total, y)
-                            window["output"].update(value=result)
+                        result = func.division(final_nums)
+                        window["output"].update(value=result)
+                        final_nums.clear()
+                        final_nums.append(result)
+
                     except ZeroDivisionError:
                         window["output"].update(value=func.get_zero_divide_message())
-
+        case "Clear":
+            num.clear()
+            final_nums.clear()
+            running_total = ""
+            x = ""
+            y = ""
+            window["output"].update(value="")
         case "Exit":
             break
 
